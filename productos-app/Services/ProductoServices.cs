@@ -73,5 +73,25 @@ namespace productos_app.Services
             }
             return result;
         }
+
+
+        public async Task<Producto> GetProducto(int id)
+        {
+            Producto producto = new Producto();
+            try
+            {
+                HttpResponseMessage response = await cliente.GetAsync($"https://localhost:{puerto}/api/Productos/{id}").ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+                producto = JsonConvert.DeserializeObject<Producto>(await response.Content.ReadAsStringAsync());
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+            return producto;
+        }
     }
 }

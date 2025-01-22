@@ -1,5 +1,4 @@
-﻿$(document).ready(() => {
-
+﻿$(document).ready(function(){
     $('.btnEliminarProducto').on('click', function () {
         const id = $(this).attr('id');
         const resp = confirm('Desea eliminar el producto?');
@@ -19,6 +18,24 @@
             });
         }
     
+    });
+
+    $('.btnEditarProducto').on('click', function () {
+        const idEditarProducto = $(this).attr('id');
+        if (idEditarProducto != null && idEditarProducto != "") {
+            $.ajax({
+                url: `GetProducto/${idEditarProducto}`,
+                method: 'GET',
+                async: false,
+                success: (data) => {
+                    data = JSON.parse(data);
+                    $('#txtEditarNombreProducto').val('asdas');
+                    $('#txtEditarDescripcionProducto').val(data.descripcion)
+                    $('#selectEditarCategoriaProducto').val(data.idCategoria);
+                }
+            });
+        }
+        $('#modalEditarProducto').modal('toggle');
     });
 
     $('#btnCrearProducto').on('click', () => {

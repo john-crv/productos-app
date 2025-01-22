@@ -79,5 +79,25 @@ namespace productos_app.Controllers
 
             return result;
         }
+
+
+        [HttpGet]
+        public string GetProducto(int id)
+        {
+            string result = "";
+            try
+            {
+                Producto producto = productoService.GetProducto(id).Result;
+                result = JsonConvert.SerializeObject(producto);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+            return result;
+        }
     }
+
 }

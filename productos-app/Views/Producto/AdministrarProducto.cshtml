@@ -9,8 +9,8 @@
     <h2 id="title">@ViewBag.Title.</h2>
     <h3>@ViewBag.Message</h3>
     <br />
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearProducto">Crear</button>
-
+    <button type="button" class="btn btn-primary mb-md-2" data-bs-toggle="modal" data-bs-target="#modalCrearProducto">Crear</button>
+    <br />
     <div class="row" id="contenidoProductos">
 
         @if (productos.Count > 0)
@@ -22,9 +22,9 @@
                     <div class="card mb-3" style="width: 18rem;">
                         <div class="card-body">
                             <div class="card-title"><strong>@producto.nombre</strong></div>
-                            <div class="card-text">@producto.descripcion</div>
+                            <div class="card-text mb-md-2">@producto.descripcion</div>
                             <button class="btn btn-danger btnEliminarProducto" id="@producto.id">Eliminar</button>
-                            <button class="btn btn-info">Editar</button>
+                            <button class="btn btn-info btnEditarProducto" id="@producto.id">Editar</button>
                         </div>
                     </div>
                 </div>
@@ -46,28 +46,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" id="txtNombreProducto" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Descripcion</label>
-                        <textarea class="form-control" id="txtDescripcionProducto" placeholder="Ingrese breve descripcion"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Categoria</label>
-                        <select class="form-select-sm" id="selectCategoriaProducto">
-                            <option selected value="0">Seleccione</option>
-                            @if (categorias.Count > 0)
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre</label>
+                    <input type="text" class="form-control" id="txtNombreProducto" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Descripcion</label>
+                    <textarea class="form-control" id="txtDescripcionProducto" placeholder="Ingrese breve descripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select class="form-select-sm" id="selectCategoriaProducto">
+                        <option selected value="0" >Seleccione</option>
+                        @if (categorias.Count > 0)
+                        {
+                            foreach (productos_app.Models.CategoriaProducto categoria in categorias)
                             {
-                                foreach (productos_app.Models.CategoriaProducto categoria in categorias)
-                                {
-                                   <option value="@categoria.id">@categoria.nombre</option>
-                                }
+                                <option value="@categoria.id">@categoria.nombre</option>
                             }
-                        </select>
-                    </div>
+                        }
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnCrearProducto" class="btn btn-primary">Crear</button>
@@ -75,5 +74,43 @@
             </div>
         </div>
     </div>
-</div>
+  </div>
+
+    <div class="modal" id="modalEditarProducto" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="">Crear producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >Nombre</label>
+                        <input type="text" class="form-control" id="txtEditarNombreProducto" placeholder="Ingrar nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Descripcion</label>
+                        <textarea class="form-control" id="txtEditarDescripcionProducto" placeholder="Ingrese breve descripcion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select class="form-select-sm" id="selectEditarCategoriaProducto">
+                            <option selected value="0">Seleccione</option>
+                            @if (categorias.Count > 0)
+                            {
+                                foreach (productos_app.Models.CategoriaProducto categoria in categorias)
+                                {
+                                    <option value="@categoria.id">@categoria.nombre</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnEditarProducto" class="btn btn-primary">Editar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
