@@ -13,12 +13,13 @@ namespace productos_app.Controllers
     {
 
         private ProductoServices productoService = new ProductoServices();
-        public async Task<ActionResult> Catalogo()
+        public ActionResult Catalogo()
         {   
             
             try
             {
-                List<Producto> productos = await productoService.getProductos();
+                List<Producto> productos = productoService.getProductos().Result;
+                ViewBag.Productos = productos;
             }
             catch (Exception e)
             {

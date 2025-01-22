@@ -1,9 +1,23 @@
-﻿@{
+﻿@model IEnumerable<productos_app.Models.Producto>
+@{
     ViewBag.Title = "About";
+    List<productos_app.Models.Producto> productos = ViewBag.Productos ? ViewBag.Productos : new List<productos_app.Models.Producto>();
+
 }
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title.</h2>
     <h3>@ViewBag.Message</h3>
+    <div class="card">
+        @if (productos.Count > 0)
+        {
+            foreach (productos_app.Models.Producto producto in productos)
+            {
+                    <div class="card-body">
+                        <div class="card-title">@producto.nombre</div>
+                        <div class="card-text">@producto.descripcion</div>
+                    </div>
+            }
+        }
+    </div>
 
-    <p>Use this area to provide additional information.</p>
 </main>

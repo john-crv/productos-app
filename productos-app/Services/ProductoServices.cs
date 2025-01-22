@@ -18,9 +18,8 @@ namespace productos_app.Services
             List<Producto> productos = new List<Producto>();
             try
             {
-                HttpResponseMessage response = await cliente.GetAsync("https://localhost:44377/api/Productos");
+                HttpResponseMessage response = await cliente.GetAsync("https://localhost:44377/api/Productos").ConfigureAwait(false);
                 productos = JsonConvert.DeserializeObject<List<Producto>>(await response.Content.ReadAsStringAsync());
-
             }
             catch (Exception e )
             { 
