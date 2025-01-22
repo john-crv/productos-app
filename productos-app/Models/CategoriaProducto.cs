@@ -11,9 +11,6 @@ namespace productos_app.Models
     {
         public int id { get; set; }
         public string nombre { get; set; }
-        
-        public int prducotId { get; set; }  
-
-        public Producto producto { get; set; }  
+       
     }
 }

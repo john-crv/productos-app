@@ -1,4 +1,5 @@
-﻿using productos_app.Models;
+﻿using Newtonsoft.Json;
+using productos_app.Models;
 using productos_app.Services;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,23 @@ namespace productos_app.Controllers
             ViewBag.CategoriasProducto = categoriasProducto;
 
             return View();
+        }
+
+        [HttpPost]
+        public string CrearProducto(Producto producto)
+        {
+            string result = "";
+            try
+            {
+               Producto nuevoProducto = productoService.CreateProducto(producto).Result;
+                result = JsonConvert.SerializeObject(nuevoProducto);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            return "funciono";
         }
     }
 }
