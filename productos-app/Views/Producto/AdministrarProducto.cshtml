@@ -9,15 +9,14 @@
     <h2 id="title">@ViewBag.Title.</h2>
     <h3>@ViewBag.Message</h3>
     <br />
-    <button type="button" class="btn btn-primary mb-md-2" data-bs-toggle="modal" data-bs-target="#modalCrearProducto">Crear</button>
-    <br />
+    <button type="button" class="btn btn-primary mb-md-4" data-bs-toggle="modal" data-bs-target="#modalCrearProducto">Crear</button>
     <div class="row" id="contenidoProductos">
 
         @if (productos.Count > 0)
         {
             foreach (productos_app.Models.Producto producto in productos)
             {
-                <div class="col-md-4 col-lg-4 col-sm-4" id="cardProducto-@producto.id">
+                <div class="col-md-4 col-lg-3 col-sm-4" id="cardProducto-@producto.id">
 
                     <div class="card mb-3" style="width: 18rem;">
                         <div class="card-body">
@@ -107,7 +106,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnEditarProducto" class="btn btn-primary">Editar</button>
+                    <button type="button" id="btnModalEditarProducto" class="btn btn-primary">Editar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>

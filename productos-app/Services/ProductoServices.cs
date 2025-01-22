@@ -93,5 +93,24 @@ namespace productos_app.Services
 
             return producto;
         }
+
+        public async Task<bool> EditarProducto(int id, Producto producto)
+        {
+            bool result = false;
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(producto);
+                HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await cliente.PutAsync($"https://localhost:{puerto}/api/Productos/{id}", content).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+                result = true;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            return result;
+        }
     }
 }

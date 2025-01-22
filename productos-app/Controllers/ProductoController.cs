@@ -60,8 +60,6 @@ namespace productos_app.Controllers
 
         }
 
-
-
         [HttpDelete]
         public bool EliminarProducto(int id)
         {
@@ -97,6 +95,24 @@ namespace productos_app.Controllers
             }
 
             return result;
+        }
+
+        [HttpPut]
+
+        public bool EditarProducto(int id, Producto producto)
+        {
+            bool result = false;
+            try
+            {
+                result = productoService.EditarProducto(id, producto).Result;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+            return false;
         }
     }
 
