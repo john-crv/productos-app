@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<productos_app.Models.Producto>
 @{
-    ViewBag.Title = "About";
-    List<productos_app.Models.Producto> productos = ViewBag.Productos ? ViewBag.Productos : new List<productos_app.Models.Producto>();
+    ViewBag.Title = "Catalogo de productos";
+    List<productos_app.Models.Producto> productos = ViewBag.Productos != null ? ViewBag.Productos : new List<productos_app.Models.Producto>();
 
 }
 <main aria-labelledby="title">

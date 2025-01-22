@@ -16,7 +16,7 @@ namespace productos_app
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Producto", action = "Contact", id = UrlParameter.Optional }
+                defaults: new { controller = "Producto", action = "Catalogo", id = UrlParameter.Optional }
             );
         }
     }

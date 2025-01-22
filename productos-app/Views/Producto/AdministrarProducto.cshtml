@@ -1,0 +1,73 @@
+﻿@model IEnumerable<productos_app.Models.Producto>
+@{
+    ViewBag.Title = "Administrar Productos";
+    List<productos_app.Models.Producto> productos = ViewBag.Productos != null ? ViewBag.Productos : new List<productos_app.Models.Producto>();
+    List<productos_app.Models.CategoriaProducto> categorias = ViewBag.CategoriasProducto != null ? ViewBag.CategoriasProducto : new List<productos_app.Models.CategoriaProducto>();
+
+}
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+    <div class="card">
+        @if (productos.Count > 0)
+        {
+            foreach (productos_app.Models.Producto producto in productos)
+            {
+                <div class="card-body">
+                    <div class="card-title">@producto.nombre</div>
+                    <div class="card-text">@producto.descripcion</div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class=card-body> No hay productos creados</div>
+        }
+    </div>
+</main>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearProducto">Crear</button>
+
+
+<div class="modal" id="modalCrearProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Crear producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Copy
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Descripcion Breve</label>
+                        <textarea class="form-control" id="exampleInputPassword1" placeholder="Ingrese breve descripcion"></textarea>
+                    </div>
+                    <div class="form-check">
+                        <label>Categoria</label>
+                        <select class="form-select-sm">
+                            <option selected value="0">Seleccione</option>
+                            @if (categorias.Count > 0)
+                            {
+                                foreach (productos_app.Models.CategoriaProducto categoria in categorias)
+                                {
+                                   <option value="@categoria.id">@categoria.nombre</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

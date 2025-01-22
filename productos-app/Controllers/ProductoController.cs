@@ -13,12 +13,13 @@ namespace productos_app.Controllers
     {
 
         private ProductoServices productoService = new ProductoServices();
+        private CategoriaProductoServices categoriaProductoService = new CategoriaProductoServices();
         public ActionResult Catalogo()
         {   
             
             try
             {
-                List<Producto> productos = productoService.getProductos().Result;
+                List<Producto> productos = productoService.GetProductos().Result;
                 ViewBag.Productos = productos;
             }
             catch (Exception e)
@@ -29,16 +30,12 @@ namespace productos_app.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult AdministrarProducto()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            List<Producto> productos = productoService.GetProductos().Result;
+            List<CategoriaProducto> categoriasProducto = categoriaProductoService.GetCategoriasProducto().Result;
+            ViewBag.Productos = productos;
+            ViewBag.CategoriasProducto = categoriasProducto;
 
             return View();
         }
