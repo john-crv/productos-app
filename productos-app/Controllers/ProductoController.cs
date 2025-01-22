@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace productos_app.Controllers
 {
@@ -55,6 +56,27 @@ namespace productos_app.Controllers
 
                 throw e;
             }
+            return result;
+
+        }
+
+
+
+        [HttpDelete]
+        public bool EliminarProducto(int id)
+        {
+            bool result = false;
+            try
+            {
+               result = productoService.EliminarProducto(id).Result;
+               
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
             return result;
         }
     }

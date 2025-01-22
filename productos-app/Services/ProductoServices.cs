@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -54,6 +55,23 @@ namespace productos_app.Services
             }
 
             return nuevoProducto;
+        }
+
+        public async Task<bool> EliminarProducto(int id)
+        {
+            bool result = false;
+            try
+            {
+                HttpResponseMessage response = await cliente.DeleteAsync($"https://localhost:{puerto}/api/Productos/{id}").ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+                result = true;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            return result;
         }
     }
 }

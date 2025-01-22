@@ -8,15 +8,27 @@
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title.</h2>
     <h3>@ViewBag.Message</h3>
-    <div class="card" id="contenidoProductos">
+    <br />
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearProducto">Crear</button>
+
+    <div class="row" id="contenidoProductos">
+
         @if (productos.Count > 0)
         {
             foreach (productos_app.Models.Producto producto in productos)
             {
-                <div class="card-body">
-                    <div class="card-title">@producto.nombre</div>
-                    <div class="card-text">@producto.descripcion</div>
+                <div class="col-md-4 col-lg-4 col-sm-4" id="cardProducto-@producto.id">
+
+                    <div class="card mb-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <div class="card-title"><strong>@producto.nombre</strong></div>
+                            <div class="card-text">@producto.descripcion</div>
+                            <button class="btn btn-danger btnEliminarProducto" id="@producto.id">Eliminar</button>
+                            <button class="btn btn-info">Editar</button>
+                        </div>
+                    </div>
                 </div>
+                <br />
             }
         }
         else
@@ -25,9 +37,6 @@
         }
     </div>
 </main>
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearProducto">Crear</button>
-
 
 <div class="modal" id="modalCrearProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

@@ -1,5 +1,26 @@
 ﻿$(document).ready(() => {
 
+    $('.btnEliminarProducto').on('click', function () {
+        const id = $(this).attr('id');
+        const resp = confirm('Desea eliminar el producto?');
+        if (resp) {
+            $.ajax({
+                url: `/Producto/EliminarProducto/${id}`,
+                method: 'DELETE',
+                async: false,
+                success: (data) => {
+                    if (data) {
+                        $(`#cardProducto-${id}`).remove();
+                    }
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            });
+        }
+    
+    });
+
     $('#btnCrearProducto').on('click', () => {
         const nombreProducto = $('#txtNombreProducto').val();
         const descripcionProducto = $('#txtDescripcionProducto').val();
@@ -34,4 +55,6 @@
             alert('Debe llenar los campos')
         }
     });
+
+   
 })
