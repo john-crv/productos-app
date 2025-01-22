@@ -55,7 +55,7 @@ namespace productos_app.Controllers
 
                 throw e;
             }
-            return "funciono";
+            return result;
         }
     }
 }

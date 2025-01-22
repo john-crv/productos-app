@@ -14,7 +14,14 @@
                     async: false,
                     data: producto,
                     success: (data) => {
-                        console.log(data);
+                        $('#contenidoProductos').prepend(`
+                             <div class="card-body">
+                             <div class="card-title">${data.nombre}</div>
+                            <div class="card-text">${data.descripcion}</div>
+                            </div>
+                        `);
+
+                        $('#modalCrearProduto').modal('toggle');
                     },
                     error: (error) => {
                         console.log(error);
