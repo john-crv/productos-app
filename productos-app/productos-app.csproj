@@ -150,6 +150,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\cafetera-oster.jpg" />
+    <Content Include="images\notebook-asus.jpg" />
+    <Content Include="images\notebook-hp.jpg" />
+    <Content Include="images\polera-running-nike.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -167,7 +171,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\Producto\administrarProducto.js" />
     <Content Include="Scripts\Producto\catalogo.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -181,7 +184,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Producto\Catalogo.cshtml" />
-    <Content Include="Views\Producto\AdministrarProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

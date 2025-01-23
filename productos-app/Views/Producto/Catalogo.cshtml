@@ -1,23 +1,145 @@
 ﻿@model IEnumerable<productos_app.Models.Producto>
 @{
-    ViewBag.Title = "Catalogo de productos";
+    ViewBag.Title = "Catalago de productos";
     List<productos_app.Models.Producto> productos = ViewBag.Productos != null ? ViewBag.Productos : new List<productos_app.Models.Producto>();
+    List<productos_app.Models.CategoriaProducto> categorias = ViewBag.CategoriasProducto != null ? ViewBag.CategoriasProducto : new List<productos_app.Models.CategoriaProducto>();
 
 }
+
+<style>
+    .zoom {
+        padding: 50px;
+        transition: transform .2s; /* Animation */
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+        .zoom:hover {
+            transform: scale(3.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+</style>
+    @{
+        string json = Json.Encode(categorias);
+       
+    }
+<span id="json" style="visibility:hidden">@json</span>
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title.</h2>
     <h3>@ViewBag.Message</h3>
-    <div class="card">
+    <br />
+    <button type="button" class="btn btn-primary mb-md-4" data-bs-toggle="modal" data-bs-target="#modalCrearProducto">Crear</button>
+    <div class="row" id="contenidoProductos">
+
         @if (productos.Count > 0)
         {
             foreach (productos_app.Models.Producto producto in productos)
             {
-                    <div class="card-body">
-                        <div class="card-title">@producto.nombre</div>
-                        <div class="card-text">@producto.descripcion</div>
+                <div class="col-md-4 col-lg-3 col-sm-4" id="cardProducto-@producto.id">
+
+                    <div class="card mb-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <img src="~/images/@producto.imagen" class="img-fluid zoom" alt="Responsive image" style="width: 254px; height: 254px;">
+                            <div class="card-title"><strong>@producto.nombre</strong></div>
+                            <div class="card-text mb-md-2">@producto.descripcion</div>
+                            <div class="card-text mb-md-2">
+                                @foreach (productos_app.Models.CategoriaProducto categoria in categorias)
+                                {
+                                    if (categoria.id == producto.idCategoria)
+                                    {
+                                        @categoria.nombre;
+                                        break;
+                                    }
+                                }
+                            </div>
+                            <button class="btn btn-danger btnEliminarProducto" id="@producto.id">Eliminar</button>
+                            <button class="btn btn-info btnEditarProducto" id="@producto.id">Editar</button>
+                        </div>
                     </div>
+                </div>
+                <br />
             }
         }
+        else
+        {
+            <div class=card-body> No hay productos creados</div>
+        }
     </div>
-
 </main>
+
+<div class="modal" id="modalCrearProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Crear producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre</label>
+                    <input type="text" class="form-control" id="txtNombreProducto" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Descripcion</label>
+                    <textarea class="form-control" id="txtDescripcionProducto" placeholder="Ingrese breve descripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select class="form-select-sm" id="selectCategoriaProducto">
+                        <option selected value="0">Seleccione</option>
+                        @if (categorias.Count > 0)
+                        {
+                            foreach (productos_app.Models.CategoriaProducto categoria in categorias)
+                            {
+                                <option value="@categoria.id">@categoria.nombre</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCrearProducto" class="btn btn-primary">Crear</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modalEditarProducto" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="">Crear producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-3">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" id="txtEditarNombreProducto" placeholder="Ingrar nombre">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="exampleInputPassword1">Descripcion</label>
+                    <textarea class="form-control" id="txtEditarDescripcionProducto" placeholder="Ingrese breve descripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select class="form-select-sm mb-3" id="selectEditarCategoriaProducto">
+                        <option selected value="0">Seleccione</option>
+                        @if (categorias.Count > 0)
+                        {
+                            foreach (productos_app.Models.CategoriaProducto categoria in categorias)
+                            {
+                                <option value="@categoria.id">@categoria.nombre</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnModalEditarProducto" class="btn btn-primary">Editar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -22,7 +22,9 @@ namespace productos_app.Controllers
             try
             {
                 List<Producto> productos = productoService.GetProductos().Result;
+                List<CategoriaProducto> categoriasProducto = categoriaProductoService.GetCategoriasProducto().Result;
                 ViewBag.Productos = productos;
+                ViewBag.CategoriasProducto = categoriasProducto;
             }
             catch (Exception e)
             {
@@ -32,15 +34,6 @@ namespace productos_app.Controllers
             return View();
         }
 
-        public ActionResult AdministrarProducto()
-        {
-            List<Producto> productos = productoService.GetProductos().Result;
-            List<CategoriaProducto> categoriasProducto = categoriaProductoService.GetCategoriasProducto().Result;
-            ViewBag.Productos = productos;
-            ViewBag.CategoriasProducto = categoriasProducto;
-
-            return View();
-        }
 
         [HttpPost]
         public string CrearProducto(Producto producto)
