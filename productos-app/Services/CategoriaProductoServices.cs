@@ -14,14 +14,14 @@ namespace productos_app.Services
     {
         private HttpClient cliente = new HttpClient();
         //Cambiar ruta de acuerdo a la url de la api
-        private string url = "https://localhost:44377/api";
+        private readonly string puerto = "44377";
         public async Task<List<CategoriaProducto>> GetCategoriasProducto()
         {
 
             List<CategoriaProducto> productos = new List<CategoriaProducto>();
             try
             {
-                HttpResponseMessage response = await cliente.GetAsync("https://localhost:44377/api/CategoriaProducto").ConfigureAwait(false);
+                HttpResponseMessage response = await cliente.GetAsync($"https://localhost:{puerto}/api/CategoriaProducto").ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
                 productos = JsonConvert.DeserializeObject<List<CategoriaProducto>>(await response.Content.ReadAsStringAsync());
             }
